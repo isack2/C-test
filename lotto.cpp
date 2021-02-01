@@ -1,17 +1,16 @@
 #include<iostream>
 #include<cstdlib>
 
-typedef struct node
+typedef struct Node //struct
 {
     int data;
-    int *next;
-    int *prev;
-}nodes;
+    struct Node *next; //struct of struct pointer
+    struct Node *prev;
+}Node_node;
 
-nodes *head, *tail, *node;
+Node_node *head, *tail; //struct pointer
 
-void push(int*);
-void testing(void);
+void push(int);
 void select(int*);
 
 int main(void){
@@ -20,11 +19,14 @@ int main(void){
     int datarr[6] = {0};
     time_t *seed;
     srand(time(seed));
-    nodes *head = new nodes;
-    head->data = 0;
-
-    nodes *tail = new nodes;
-    nodes *node = new nodes;
+    Node_node *head = new Node_node;
+    head->data = NULL;
+    Node_node *tail = new Node_node;
+    tail->data = NULL;
+    head->next = tail;
+    head->prev = NULL;
+    tail->next = NULL;
+    tail->prev = head;
   
     for(int i = 0 ; i < 6 ; i++){
        select(&datarr[i]);
@@ -38,5 +40,12 @@ void select(int *arr){
     *arr = ball;
 }
 
-void push(int *arr){
+void push(int data){
+    int ball, count;
+    int temparr[data];
+    Node_node *node = new Node_node;
+    Node_node *forward;
+    Node_node *back;
+    forward = head->next;
+    forward->prev = head;
 }
