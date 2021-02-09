@@ -33,7 +33,7 @@ int main(void){
             }
         }
     }
-    }
+    } 
 
     for(int i = 0 ; i < count ; i++){
         cout << i+1 << " number is :" << arr[i] << endl;
