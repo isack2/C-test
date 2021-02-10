@@ -7,6 +7,7 @@
         "string_view": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "istream": "cpp"
     }
 }
