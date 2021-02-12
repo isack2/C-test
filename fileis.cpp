@@ -10,7 +10,7 @@ int main(void){
     string temp;
     ifstream fileios;
 
-    cout << "reading file..." << endl;
+    cout << "reading file..." << endl << endl;
     fileios.open("ios.txt");
 
     if(!fileios.is_open()){
@@ -20,5 +20,5 @@ int main(void){
 
     getline(fileios, temp);
     cout << temp << endl;
-
+    fileios.close();
 }
