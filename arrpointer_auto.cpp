@@ -1,16 +1,16 @@
 #include<iostream>
 
-const double *arr1(const double *, int);
-const double *arr2(const double *, int);
-const double *arr3(const double *, int);
+const double *arrp1(const double *, int);
+const double *arrp2(const double *, int);
+const double *arrp3(const double *, int);
 
 
 int main(void){
 
     using namespace std;
 
-    int arr[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
-    int (*ptor)[4] = arr;
+    double arr[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+    double (*ptor)[4] = arr;
 
     for(int i = 0 ; i < 3 ; i++){
         for(int j = 0 ; j < 4 ; j++){
@@ -39,22 +39,47 @@ int main(void){
     cout << "ptor address: " << ptor[2] << ",  " << "ptor value: " << *ptor[2] << endl; //ptor이 4개 짜리 배열을 가리키는 포인터이므로 ptor[2] 은 &ptor[2][0]을 가리킨다.
     cout << endl;
 
-    const double *(*ptr[3])(const double *, int) = {arr1, arr2, arr3};
+    const double * pd1 = arr[0];
+    const double * pd2 = arr[1]; 
+    const double * pd3 = arr[2];
+
+    cout << "pd1: " << pd1 << "pd1 value: " << *pd1 << endl;
+    cout << "pd1: " << pd2 << "pd1 value: " << *pd2 << endl;
+    cout << "pd1: " << pd3 << "pd1 value: " << *pd3 << endl;
+
+    cout << endl << endl;
+
+    const double *(*ptr[3])(const double *, int) = {arrp1, arrp2, arrp3};
     const double *(**ptdr)(const double *, int) = ptr;
-    auto pa = &ptr;
+
+    for(int i = 0 ; i < 3 ; i++){
+
+        cout << ptr[i] << 
+    }
     
+    auto pa = &ptr;
+
+
     cout << pa[0] << " " << pa[1] << " " << pa[2] << endl;
     cout << endl;
     cout << *pa[0] << " " << *pa[1] << " " << *pa[2] << endl;
     cout << endl << endl;
 }
 
-const double *arr1(const double *arr, int n){
-    return &arr[0];
+const double *arrp1(const double *arr, int n){
+    const double *temp = arr;
+    const double tempv = *arr;
+    return temp;
 }
-const double *arr2(const double *arr, int n){
-    return &arr[1];
+
+const double *arrp2(const double *arr, int n){
+    const double *temp = arr;
+    const double tempv = *arr;
+    return temp;
 }
-const double *arr3(const double *arr, int n){
-    return &arr[2];
+
+const double *arrp3(const double *arr, int n){
+    const double *temp = arr;
+    const double tempv = *arr;
+    return temp;
 }
