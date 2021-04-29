@@ -20,29 +20,21 @@ typedef struct _Stack
 void push(Stack *, char *);
 char *pop(Stack *);
 int priority(char *);
+void getinput(char *);
 void postfrix(Stack *, char **, char*);
 
 int main(void){
-using namespace std;
+    using namespace std;
     Stack *stack = new Stack;
     stack->top = NULL;
-    char *prix = new char;
+    char prix[SIZE] = {" "};
 
     cin.getline(prix, SIZE);
     int size = 0;
-    int x = 0;
-    while(prix[x] != '\0'){
-        if(prix[x] == ' '){
-            x++;
-        }
-        size++;
-        x++;
-    }
-    cout << "size : " << size << endl;
-    cout << "input: " << prix << endl;
+    size = strlen(prix);
 
-    char **bucket = new char*[size];
-    for(int i = 0 ; i < size ; i++){
+    char **bucket = new char*[SIZE];
+    for(int i = 0 ; i < SIZE ; i++){
         bucket[i] = new char[SIZE];
     }
 
@@ -54,20 +46,16 @@ using namespace std;
             strcpy(bucket[i], tox);
             tox = strtok(NULL, " ");
         }
-    }   
-    for(int i = 0 ; i < size ; i++){
-        cout << bucket[i] << endl;
     }
+    postfrix(stack, bucket, prix);
+    cout << prix << endl; 
 
-    //postfrix(stack, bucket, prix);
-    //cout << prix << endl; 
-
-    for(int j = 0 ; j < size ; j++){
+    for(int j = 0 ; j < SIZE ; j++){
         delete [] bucket[j];
     }
     delete [] bucket;
     delete stack;
-    delete prix;
+ 
 }
 
 void push(Stack *stack, char *chdata){
@@ -156,4 +144,9 @@ void postfrix(Stack *stack, char **str, char *rarr){
         strcpy(rarr, " ");
     }
     strcpy(rarr, pprix);
+}
+
+void getinput(char *arr){
+    std::cout << "Input: ";
+    std::cin.getline(arr, SIZE);
 }
