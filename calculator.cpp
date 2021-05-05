@@ -26,26 +26,27 @@ int main(void){
 using namespace std;
     Stack *stack = new Stack;
     stack->top = NULL;
-    char *prix = new char;
 
-    cin.getline(prix, SIZE);
+    char *tprix = new char;
+    cin.getline(tprix, SIZE);
     int size = 0;
     int x = 0;
-    while(prix[x] != '\0'){
-        if(prix[x] == ' '){
+    while(tprix[x] != '\0'){
+        if(tprix[x] == ' '){
             x++;
         }
         size++;
         x++;
     }
+    char prix[size];
+    strcpy(prix, tprix);
     cout << "size : " << size << endl;
     cout << "input: " << prix << endl;
 
     char **bucket = new char*[size];
     for(int i = 0 ; i < size ; i++){
-        bucket[i] = new char[SIZE];
+        bucket[i] = new char[size];
     }
-
     char *tox = new char;
     tox = strtok(prix, " ");
 
@@ -55,10 +56,10 @@ using namespace std;
             tox = strtok(NULL, " ");
         }
     }   
+
     for(int i = 0 ; i < size ; i++){
         cout << bucket[i] << endl;
     }
-
     //postfrix(stack, bucket, prix);
     //cout << prix << endl; 
 
@@ -67,7 +68,7 @@ using namespace std;
     }
     delete [] bucket;
     delete stack;
-    delete prix;
+    delete tprix;
 }
 
 void push(Stack *stack, char *chdata){
