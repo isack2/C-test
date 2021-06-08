@@ -1,29 +1,59 @@
 #include<iostream>
-#include<cstring>
+#include<cstdbool>
 #include<cstdlib>
-#define SIZE 100
+
+using namespace std;
+
+typedef struct _Node{
+    char *data = new char;
+    _Node *next = NULL;
+}Node;
+
+typedef struct _Stack{
+    Node *top = NULL;
+}Stack;
+
+void push(char *, Stack *);
+char *pop(Stack *);
+
 
 int main(void){
-    using namespace std;
-    char *darr = new char;
-    char **pdarr = new char*[SIZE];
-    for(int i = 0 ; i < SIZE ; i++){
-        pdarr[i] = new char;
+    Stack *stack;
+    char *sizebucket = new char;
+    char **dstr = new char*[10];
+    for(int i = 0 ; i < 10 ; i++){
+        dstr[i] = new char;
     }
-    char *dtox = new char;
+    for(int i = 0 ; i < 10 ; i++){
+        delete [] dstr[i];
+    }
+    delete [] dstr;
+}
 
-    cin.getline(darr, 100);  
-    cout << darr;
-    dtox = strtok(darr, dtox);
-    for(int i = 0 ; i < SIZE ; i++){
-        cout << darr[i] << endl;
-        dtox = strtok(darr, " ");
+void push(char *str, Stack *stack){
+    Node *node = new Node;
+    strcpy(node->data, str);
+    if(stack->top == NULL){
+        stack->top = node;
     }
-    
-    delete dtox;
-    for(int j = 0 ; j > SIZE ; j++){
-        delete [] pdarr[j];
+    else{
+        node->next = stack->top;
+        stack->top = node;
     }
-    delete [] pdarr;
-    delete darr;
+}
+
+char *pop(Stack *stack){
+    char *tempchar = new char;
+    Node *temp = new Node;
+    if(stack->top == NULL){
+        cout << "empty" << endl;
+        return 0;
+    }
+    else{
+        strcpy(tempchar, stack->top->data);
+        temp = stack->top;
+        stack->top = stack->top->next;
+        delete temp;
+        return tempchar;
+    } 
 }
