@@ -1,67 +1,61 @@
 #include<iostream>
+using namespace std;
 
+void swap(int *, int*);
 void quicksort(int *, int);
-void swap(int *, int *);
 
 int main(void){
-    using namespace std;
     int size;
 
-    cout << "Size: ";
     cin >> size;
-    cout << "array: ";
-
-    int array[size];
+    int *array = new int[size];
 
     for(int i = 0 ; i < size ; i++){
         cin >> array[i];
     }
-    cout << "array is: " << " ";
+    cout << "input : ";
     for(int i = 0 ; i < size ; i++){
         cout << array[i] << " ";
     }
-    
+    cout << endl;
+    cout << "quicksort: ";
     quicksort(array, size);
-    cout << "sorted array: ";
     for(int i = 0 ; i < size ; i++){
         cout << array[i] << " ";
     }
+    cout << endl;
+
+    delete [] array;
 }
 
-void swap(int *a, int *b){
-    int temp;
-    
-    temp = *a;
-    *a = *b;
-    *b = temp;
+void swap(int *sel1, int *sel2){
+    int temp = *sel1;
+    *sel1 = *sel2;
+    *sel2 = temp;
 }
 
 void quicksort(int *arr, int size){
-    int left, right, pivot;
-    
-    pivot = 0;
-    right = size - 1;
-    left = pivot + 1;
+    int rear = size - 1;
+    int front = 1;
 
     if(size <= 1){
         return;
     }
-    while(size > 1){
-        while((arr[left] < arr[pivot]) && (left < size - 1)){
-            left++;
-            }
-        while((arr[right] > arr[pivot]) && (right > pivot)){
-            right--;
-            }
-        if((left >= right) && (arr[pivot] >= arr[right])){
-            swap(&arr[pivot], &arr[right]);
-            pivot = right;
-            break;
-            }
+
+    while(front <= rear){
+        while(arr[0] > arr[front] && front < size - 1){
+            front++;
+        }
+        while(arr[0] < arr[rear] && rear > 0){
+            rear--;
+        }
+        if(front < rear && arr[front] > arr[rear]){
+            swap(&arr[front], &arr[rear]);
+        }
         else{
-            swap(&arr[left], &arr[right]);
-            }
-    }   
-    quicksort(arr, pivot);
-    quicksort(&arr[pivot] + 1, size - pivot - 1);
+            swap(&arr[0], &arr[rear]);
+            quicksort(arr, rear);
+            quicksort(arr + rear + 1, size - rear - 1);
+        }
+    }
 }
